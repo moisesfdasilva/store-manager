@@ -10,6 +10,7 @@ const productsController = require('../../../src/controllers/productsController'
 const {
   productsListMock,
   productIdMock,
+  newProductMock,
 } = require('./mocks/productsController.mock');
 
 describe('1. Teste de unidade do productsController', function () {
@@ -70,6 +71,27 @@ describe('1. Teste de unidade do productsController', function () {
 
       expect(res.status).to.have.been.calledWith(404);
       expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+    });
+  });
+
+  describe('1.3. Cadastrando um produto', function () {
+    it('Deve retornar o status 201 e uma chave com nome e id', async function () {
+      const res = {};
+      const req = {
+        body: { name: 'ProdutoX' },
+      };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      sinon
+        .stub(produtsService, 'insertProduct')
+        .resolves(newProductMock);
+
+      await productsController.insertProduct(req, res);
+
+      expect(res.status).to.have.been.calledWith(201);
+      expect(res.json).to.have.been.calledWith(newProductMock);
     });
   });
 

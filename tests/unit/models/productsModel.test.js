@@ -11,6 +11,7 @@ const productsModel = require('../../../src/models/productsModel');
 const {
   productsListMock,
   productIdMock,
+  newProductMock,
 } = require('./mocks/productsModel.mock');
 
 describe('3. Teste de unidade do productsModel', function () {
@@ -35,6 +36,18 @@ describe('3. Teste de unidade do productsModel', function () {
       const result = await productsModel.getById(3);
 
       expect(result).to.deep.equal(productIdMock);
+    });
+  });
+
+  describe('3.3. Cadastrando um produto', function () {
+    it('Deve retornar um objeto com id e nome do produto', async function () {
+      sinon
+        .stub(connection.execute)
+        .resolves(newProductMock);
+
+      const result = await productsModel.insertProduct('ProdutoX');
+
+      expect(result).to.deep.equal(newProductMock);
     });
   });
 
