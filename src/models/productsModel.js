@@ -1,4 +1,5 @@
 const { connection } = require('./connection');
+const convertDateTime = require('../helpers/convertDateTime');
 
 const getAll = async () => {
   const querry = 'SELECT * FROM StoreManager.products';
@@ -13,17 +14,25 @@ const getById = async (id) => {
 };
 
 const insertProduct = async (name) => {
-  const querry = 'INSERT INTO StoreManager.products (name) VALUES(?)';
+  const querry = 'INSERT INTO StoreManager.products(name) VALUES(?)';
   const [newProduct] = await connection.execute(querry, [name]);
   return { id: newProduct.insertId, name };
 };
 
 const insertSaledProduct = async (saledProduct) => {
-  // StoreManager.sales                insere now()
-  // StoreManager.sales_products       insere dado
-  const querry = 'INSERT INTO StoreManager.products (product_id, quantity) VALUES(?, ?)';
-  const [newProduct] = await connection.execute(querry, [saledProduct]);
-  return { id: newProduct.insertId, saledProduct };
+  const querrySales = 'INSERT INTO StoreManager.sales(date) VALUES(?)';
+  const fullDateTimeNow = new Date();
+  const convertedDateTimeNow = convertDateTime(fullDateTimeNow);
+  const [newSale] = await connection.execute(querrySales, [convertedDateTimeNow]);
+
+  const table = 'StoreManager.sales_products';
+  const querrySalProd = `INSERT INTO ${table} (sale_id, product_id, quantity) VALUES(?, ?, ?)`;
+  
+  saledProduct.forEach(async ({ productId, quantity }) => {
+    await connection.execute(querrySalProd, [newSale.insertId, productId, quantity]);
+  });
+  
+  return { id: newSale.insertId, itemsSold: saledProduct };
 };
 
 module.exports = {
