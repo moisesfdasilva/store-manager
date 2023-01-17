@@ -1,13 +1,13 @@
 const { connection } = require('./connection');
 const convertDateTime = require('../helpers/convertDateTime');
 
-const getAll = async () => {
+const getAllProducts = async () => {
   const querry = 'SELECT * FROM StoreManager.products';
   const [products] = await connection.execute(querry);
   return products;
 };
 
-const getById = async (id) => {
+const getProductById = async (id) => {
   const querry = 'SELECT * FROM StoreManager.products WHERE id= ?';
   const [[product]] = await connection.execute(querry, [id]);
   return product;
@@ -36,8 +36,8 @@ const insertSaledProduct = async (saledProduct) => {
 };
 
 module.exports = {
-  getAll,
-  getById,
+  getAllProducts,
+  getProductById,
   insertProduct,
   insertSaledProduct,
 };

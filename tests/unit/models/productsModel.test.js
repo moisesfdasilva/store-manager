@@ -21,7 +21,7 @@ describe('3. Teste de unidade do productsModel', function () {
         .stub(connection.execute)
         .resolves(productsListMock);
       
-      const result = await productsModel.getAll();
+      const result = await productsModel.getAllProducts();
 
       expect(result).to.deep.equal(productsListMock);
     });
@@ -33,7 +33,7 @@ describe('3. Teste de unidade do productsModel', function () {
         .stub(connection.execute)
         .resolves(productIdMock);
 
-      const result = await productsModel.getById(3);
+      const result = await productsModel.getProductById(3);
 
       expect(result).to.deep.equal(productIdMock);
     });

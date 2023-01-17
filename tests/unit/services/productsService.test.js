@@ -18,10 +18,10 @@ describe('2. Teste de unidade do productsService', function () {
   describe('2.1. Listando todos produtos', function () {
     it('Deve retornar a lista completa', async function () {
       sinon
-        .stub(productsModel, 'getAll')
+        .stub(productsModel, 'getAllProducts')
         .resolves(productsListMock);
 
-      const result = await productsService.getAll();
+      const result = await productsService.getAllProducts();
 
       expect(result).to.deep.equal(productsListMock);
     });
@@ -30,10 +30,10 @@ describe('2. Teste de unidade do productsService', function () {
   describe('2.2. Busca um produto por id', function () {
     it('Deve retornar os dados do produto', async function () {
       sinon
-        .stub(productsModel, 'getById')
+        .stub(productsModel, 'getProductById')
         .resolves(productIdMock);
 
-      const result = await productsService.getById(3);
+      const result = await productsService.getProductById(3);
 
       expect(result).to.deep.equal(productIdMock);
     });

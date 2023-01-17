@@ -1,13 +1,13 @@
 const productsService = require('../services/productsService');
 
-const getAll = async (_req, res) => {
-  const products = await productsService.getAll();
+const getAllProducts = async (_req, res) => {
+  const products = await productsService.getAllProducts();
   res.status(200).json(products);
 };
 
-const getById = async (req, res) => {
+const getProductById = async (req, res) => {
   const { id } = req.params;
-  const product = await productsService.getById(id);
+  const product = await productsService.getProductById(id);
   if (product === undefined) {
     res.status(404).json({ message: 'Product not found' });
   }
@@ -23,12 +23,15 @@ const insertProduct = async (req, res) => {
 const insertSaledProduct = async (req, res) => {
   const saledProduct = req.body;
   const product = await productsService.insertSaledProduct(saledProduct);
+  // if (product === undefined) {
+  //   res.status(404).json({ message: 'Product not found' });
+  // }
   res.status(201).json(product);
 };
 
 module.exports = {
-  getAll,
-  getById,
+  getAllProducts,
+  getProductById,
   insertProduct,
   insertSaledProduct,
 };

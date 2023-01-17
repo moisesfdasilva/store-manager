@@ -23,10 +23,10 @@ describe('1. Teste de unidade do productsController', function () {
       res.json = sinon.stub().returns();
 
       sinon
-        .stub(produtsService, 'getAll')
+        .stub(produtsService, 'getAllProducts')
         .resolves(productsListMock);
 
-      await productsController.getAll(req, res);
+      await productsController.getAllProducts(req, res);
 
       expect(res.status).to.have.been.calledWith(200);
       expect(res.json).to.have.been.calledWith(productsListMock);
@@ -44,10 +44,10 @@ describe('1. Teste de unidade do productsController', function () {
       res.json = sinon.stub().returns();
 
       sinon
-        .stub(produtsService, 'getById')
+        .stub(produtsService, 'getProductById')
         .resolves(productIdMock);
 
-      await productsController.getById(req, res);
+      await productsController.getProductById(req, res);
 
       expect(res.status).to.have.been.calledWith(200);
       expect(res.json).to.have.been.calledWith(productIdMock);
@@ -64,10 +64,10 @@ describe('1. Teste de unidade do productsController', function () {
       res.json = sinon.stub().returns();
 
       sinon
-        .stub(produtsService, 'getById')
+        .stub(produtsService, 'getProductById')
         .resolves(undefined);
 
-      await productsController.getById(req, res);
+      await productsController.getProductById(req, res);
 
       expect(res.status).to.have.been.calledWith(404);
       expect(res.json).to.have.been.calledWith({ message: 'Product not found' });

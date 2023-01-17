@@ -8,8 +8,8 @@ const salProdFieldsAuthMiddware = require('./middlewares/salProdFieldsAuthMiddwa
 
 app.use(express.json());
 
-app.get('/products', productsController.getAll);
-app.get('/products/:id', productsController.getById);
+app.get('/products', productsController.getAllProducts);
+app.get('/products/:id', productsController.getProductById);
 app.post('/products', nameProductAuthMiddware, productsController.insertProduct);
 app.post('/sales', salProdFieldsAuthMiddware, productsController.insertSaledProduct);
 
