@@ -3,13 +3,13 @@ const express = require('express');
 const app = express();
 
 const productsController = require('./controllers/productsController');
-const nameAuthMiddware = require('./middlewares/nameAuthMiddware');
+const nameProductAuthMiddware = require('./middlewares/nameProductAuthMiddware');
 
 app.use(express.json());
 
 app.get('/products', productsController.getAll);
 app.get('/products/:id', productsController.getById);
-app.post('/products', nameAuthMiddware, productsController.insertProduct);
+app.post('/products', nameProductAuthMiddware, productsController.insertProduct);
 app.post('/sales', productsController.insertSaledProduct);
 
 // não remova esse endpoint, é para o avaliador funcionar
