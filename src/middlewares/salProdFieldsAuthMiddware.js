@@ -7,11 +7,11 @@ const salProdFieldsAuthMiddware = async (req, res, next) => {
     if (quantity === undefined) {
       return res.status(400).json({ message: '"quantity" is required' });
     }
-    if (Math.trunc(quantity) < 1) {
+    if (Number(quantity) < 1) {
       return res.status(422).json({ message: '"quantity" must be greater than or equal to 1' });
     }
+    return next();
   });
-  next();
 };
 
 module.exports = salProdFieldsAuthMiddware;
