@@ -21,12 +21,12 @@ const insertProduct = async (req, res) => {
 };
 
 const insertSaledProduct = async (req, res) => {
-  const saledProduct = req.body;
-  const product = await productsService.insertSaledProduct(saledProduct);
-  // if (product === undefined) {
-  //   res.status(404).json({ message: 'Product not found' });
-  // }
-  res.status(201).json(product);
+  const saledProducts = req.body;
+  const products = await productsService.insertSaledProduct(saledProducts);
+  if (products.message) {
+    res.status(404).json({ message: products.message });
+  }
+  res.status(201).json(products);
 };
 
 module.exports = {
