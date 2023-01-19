@@ -17,27 +17,20 @@ const insertProduct = async (name) => {
 };
 
 const insertSaledProduct = async (saledProducts) => {
-  const errorsProductIdProm = saledProducts.map(({ productId }) => {
-    const product = validationsInputValues.validateProductId(productId);
-    return product;
-  });
-  const errorsProductId = await Promise.all(errorsProductIdProm);
-  
-  if (errorsProductId.some(({ type }) => type === 'Product not found')) {
-    return { message: 'Product not found' };
-  }
+  const verifyIds = await validationsInputValues.validateProductsId(saledProducts);
+  if (verifyIds.type) return { message: 'Product not found' };
 
-  // se o id existe cadastra
-  // const insertedSale = await productsModel.insertSale();
-  // const saledProductsPromises = saledProducts.map((product) => (
-  //   productsModel.insertSaleProduct(insertedSale.insertId, product)
-  // ));
+  const productSaleId = await productsModel.insertSale();
 
-  // const aaa = await Promise.all(saledProductsPromises);
+  const saledProductsPromises = saledProducts.map(({ productId, quantity }) => (
+    productsModel.insertSaleProducts({ productSaleId, productId, quantity })
+  ));
 
-  // const result = { id: insertedSale.insertId, itemsSold: saledProduct }
+  await Promise.all(saledProductsPromises);
 
-  return 'aaa';
+  const result = { id: productSaleId, itemsSold: saledProducts };
+
+  return result;
 };
 
 module.exports = {

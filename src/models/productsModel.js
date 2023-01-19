@@ -19,20 +19,29 @@ const insertProduct = async (name) => {
   return { id: newProduct.insertId, name };
 };
 
+const getProductsByIds = async (sqlArray) => {
+  const tb = 'StoreManager.products';
+  const [products] = await connection
+    .execute(`SELECT * FROM ${tb} WHERE id IN ${sqlArray}`);
+  return products;
+};
+
 const insertSale = async () => {
   const querry = 'INSERT INTO StoreManager.sales(date) VALUES(?)';
   const fullDateTimeNow = new Date();
   const convertedDateTimeNow = convertDateTime(fullDateTimeNow);
   const [newSale] = await connection.execute(querry, [convertedDateTimeNow]);
 
-  return newSale;
+  return newSale.insertId;
 };
 
-const insertSaleProduct = async (saleId, { productId, quantity }) => {
-  const tb = 'StoreManager.sales_products';
-  const querry = `INSERT IGNORE INTO ${tb} (sale_id, product_id, quantity) VALUES(?, ?, ?)`;
-  const newSalProd = await connection.execute(querry, [saleId, productId, quantity]);
+const insertSaleProducts = async ({ productSaleId, productId, quantity }) => {
+  const qPt1 = 'INSERT IGNORE INTO StoreManager.sales_products(sale_id, product_id, quantity)';
+  const qPt2 = 'VALUES (?, ?, ?)';
 
+  const [newSalProd] = await connection
+    .execute(`${qPt1} ${qPt2}`, [productSaleId, productId, quantity]);
+  
   return newSalProd;
 };
 
@@ -40,6 +49,7 @@ module.exports = {
   getAllProducts,
   getProductById,
   insertProduct,
+  getProductsByIds,
   insertSale,
-  insertSaleProduct,
+  insertSaleProducts,
 };

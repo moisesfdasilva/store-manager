@@ -24,7 +24,7 @@ const insertSaledProduct = async (req, res) => {
   const saledProducts = req.body;
   const products = await productsService.insertSaledProduct(saledProducts);
   if (products.message) {
-    res.status(404).json({ message: products.message });
+    return res.status(404).json({ message: products.message });
   }
   res.status(201).json(products);
 };
