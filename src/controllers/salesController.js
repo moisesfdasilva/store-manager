@@ -14,7 +14,17 @@ const getSaleById = async (req, res) => {
   return res.status(200).json(sale);
 };
 
+const deleteSaleById = async (req, res) => {
+  const { id } = req.params;
+  const sale = await salesService.deleteSaleById(id);
+  if (sale.message) {
+    return res.status(404).json({ message: sale.message });
+  }
+  return res.status(204).json();
+};
+
 module.exports = {
   getAllSales,
   getSaleById,
+  deleteSaleById,
 };

@@ -15,7 +15,18 @@ const getSaleById = async (saleId) => {
   return sale;
 };
 
+const deleteSaleById = async (id) => {
+  const verifyId = await validationsInputValues.validateSaleId(id);
+  console.log(verifyId);
+  if (verifyId.type) return { message: 'Sale not found' };
+
+  const deleteSale = await salesModel.deleteSaleById(id);
+
+  return deleteSale;
+};
+
 module.exports = {
   getAllSales,
   getSaleById,
+  deleteSaleById,
 };
