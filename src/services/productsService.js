@@ -42,10 +42,20 @@ const updateProductName = async ({ name, id }) => {
   return { id, name };
 };
 
+const deleteProductById = async (id) => {
+  const verifyId = await validationsInputValues.validateProductId(id);
+  if (verifyId.type) return { message: 'Product not found' };
+
+  const deleteProduct = await productsModel.deleteProductById(id);
+  
+  return deleteProduct;
+};
+
 module.exports = {
   getAllProducts,
   getProductById,
   insertProduct,
   insertSaledProduct,
   updateProductName,
+  deleteProductById,
 };

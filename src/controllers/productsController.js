@@ -32,12 +32,20 @@ const insertSaledProduct = async (req, res) => {
 const updateProductName = async (req, res) => {
   const { name } = req.body;
   const { id } = req.params;
-
   const products = await productsService.updateProductName({ name, id });
   if (products.message) {
     return res.status(404).json({ message: products.message });
   }
   res.status(200).json(products);
+};
+
+const deleteProductById = async (req, res) => {
+  const { id } = req.params;
+  const products = await productsService.deleteProductById(id);
+  if (products.message) {
+    return res.status(404).json({ message: products.message });
+  }
+  res.status(204).json();
 };
 
 module.exports = {
@@ -46,4 +54,5 @@ module.exports = {
   insertProduct,
   insertSaledProduct,
   updateProductName,
+  deleteProductById,
 };

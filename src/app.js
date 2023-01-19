@@ -14,6 +14,7 @@ app.get('/products', productsController.getAllProducts);
 app.get('/products/:id', productsController.getProductById);
 app.post('/products', nameProductAuthMiddware, productsController.insertProduct);
 app.put('/products/:id', nameProductAuthMiddware, productsController.updateProductName);
+app.delete('/products/:id', productsController.deleteProductById);
 
 app.post('/sales', salProdFieldsAuthMiddware, productsController.insertSaledProduct);
 app.get('/sales', servicesController.getAllSales);

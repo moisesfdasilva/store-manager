@@ -215,5 +215,85 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "ea5f6835-9508-4566-b3fc-8d9f09cdd37e",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/products/5",
+    "url": "http://localhost:3000/products/5",
+    "method": "DELETE",
+    "sortNum": 0,
+    "created": "2023-01-19T18:57:03.090Z",
+    "modified": "2023-01-19T18:57:03.090Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"Martelo do Batman\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "63c9870f-0742-447f-aa18-a1f63a0b671e",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/products/4",
+    "url": "http://localhost:3000/products/4",
+    "method": "DELETE",
+    "sortNum": 0,
+    "created": "2023-01-19T18:58:29.191Z",
+    "modified": "2023-01-19T18:59:07.876Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "35929848-0209-45e1-92c3-8effc0ec1fc6",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/products/4",
+    "url": "http://localhost:3000/products/4",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-01-19T18:58:41.637Z",
+    "modified": "2023-01-19T19:03:41.385Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "a226f03f-abdb-455a-b2da-4d2ec008f4dc",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/products/4",
+    "url": "http://localhost:3000/products/4",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-01-19T19:08:33.676Z",
+    "modified": "2023-01-19T19:08:33.676Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"laser do superman\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "52fa7955-b59c-4d83-8964-17a3aae8cc4f",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/products/5",
+    "url": "http://localhost:3000/products/3",
+    "method": "DELETE",
+    "sortNum": 0,
+    "created": "2023-01-19T19:08:39.329Z",
+    "modified": "2023-01-19T19:17:42.493Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]
