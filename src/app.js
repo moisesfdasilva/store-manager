@@ -16,7 +16,7 @@ app.post('/products', nameProductAuthMiddware, productsController.insertProduct)
 app.post('/sales', salProdFieldsAuthMiddware, productsController.insertSaledProduct);
 
 app.get('/sales', servicesController.getAllSales);
-// app.get('/products/:id', productsController.getProductById);
+app.get('/sales/:id', servicesController.getSaleById);
 
 // não remova esse endpoint, é para o avaliador funcionar
 app.get('/', (_request, response) => {

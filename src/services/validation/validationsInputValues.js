@@ -1,4 +1,5 @@
 const productsModel = require('../../models/productsModel');
+const salesModel = require('../../models/salesModel');
 
 const validateProductsId = async (saledProducts) => {
   const productsId = saledProducts.map(({ productId }) => (productId));
@@ -14,6 +15,17 @@ const validateProductsId = async (saledProducts) => {
   return { type: '', message: '' };
 };
 
+const validateSaleId = async (saleId) => {
+  const findId = await salesModel.getSaleById(saleId);
+
+  if (!findId) {
+    return { type: 'err', message: 'Sale not found' };
+  }
+
+  return { type: '', message: '' };
+};
+
 module.exports = {
   validateProductsId,
+  validateSaleId,
 };
