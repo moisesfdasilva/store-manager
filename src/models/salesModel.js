@@ -29,13 +29,6 @@ const getSaleWhithProducById = async (saleId) => {
   return sale;
 };
 
-// date
-// product_id AS productId
-// quantity
-
-// StoreManager.sales(id, date)
-// StoreManager.sales_products(sale_id, product_id, quantity)
-
 module.exports = {
   getAllSales,
   getSaleById,

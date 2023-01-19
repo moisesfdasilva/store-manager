@@ -33,9 +33,19 @@ const insertSaledProduct = async (saledProducts) => {
   return result;
 };
 
+const updateProductName = async ({ name, id }) => {
+  const verifyId = await validationsInputValues.validateProductId(id);
+  if (verifyId.type) return { message: 'Product not found' };
+
+  await productsModel.updateProductName({ name, id });
+  
+  return { id, name };
+};
+
 module.exports = {
   getAllProducts,
   getProductById,
   insertProduct,
   insertSaledProduct,
+  updateProductName,
 };

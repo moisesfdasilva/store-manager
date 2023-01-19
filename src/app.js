@@ -13,8 +13,9 @@ app.use(express.json());
 app.get('/products', productsController.getAllProducts);
 app.get('/products/:id', productsController.getProductById);
 app.post('/products', nameProductAuthMiddware, productsController.insertProduct);
-app.post('/sales', salProdFieldsAuthMiddware, productsController.insertSaledProduct);
+app.put('/products/:id', nameProductAuthMiddware, productsController.updateProductName);
 
+app.post('/sales', salProdFieldsAuthMiddware, productsController.insertSaledProduct);
 app.get('/sales', servicesController.getAllSales);
 app.get('/sales/:id', servicesController.getSaleById);
 
