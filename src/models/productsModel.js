@@ -33,8 +33,8 @@ const updateProductName = async ({ name, id }) => {
 
 const deleteProductById = async (id) => {
   const querry = 'DELETE FROM StoreManager.products WHERE id = ?';
-  const deleteProduct = await connection.execute(querry, [id]);
-  return deleteProduct;
+  const [deleteProduct] = await connection.execute(querry, [id]);
+  return deleteProduct.affectedRows;
 };
 
 const searchProductName = async (searchIncludes) => {

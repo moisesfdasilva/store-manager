@@ -53,8 +53,8 @@ describe('2. Teste de unidade do productsService', function () {
     });
   });
 
-  describe('2.4. Modificando um produto cadastrado com id válido', function () {
-    it('Deve retornar um objeto com id e nome do produto', async function () {
+  describe('2.4. Modificando um produto cadastrado', function () {
+    it('a. Se o id é válido retorna um objeto com id e nome do produto', async function () {
       sinon
         .stub(validationsInputValues, 'validateProductId')
         .resolves({ type: '', message: '' });
@@ -67,12 +67,37 @@ describe('2. Teste de unidade do productsService', function () {
       expect(result).to.deep.equal(productUpIdMock);
     });
 
-    it('Deve retornar um objeto com id e nome do produto', async function () {
+    it('b. Se o id não é válido retorna a mensagem "Product not found"', async function () {
       sinon
         .stub(validationsInputValues, 'validateProductId')
         .resolves({ type: 'err', message: 'Product not found' });
 
       const result = await productsService.updateProductName({ message: 'Product not found' });
+
+      expect(result).to.deep.equal({ message: 'Product not found' });
+    });
+  });
+
+  describe('2.5. Deleta um produto pelo id', function () {
+    it('a. Se o id é válido ...', async function () {
+      sinon
+        .stub(validationsInputValues, 'validateProductId')
+        .resolves({ type: '', message: '' });
+      sinon
+        .stub(productsModel, 'deleteProductById')
+        .resolves(productUpIdMock);
+
+      const result = await productsService.deleteProductById(1);
+
+      expect(result).to.deep.equal(productUpIdMock);
+    });
+
+    it('b. Se o id não é válido retorna a mensagem "Product not found"', async function () {
+      sinon
+        .stub(validationsInputValues, 'validateProductId')
+        .resolves({ type: 'err', message: 'Product not found' });
+
+      const result = await productsService.deleteProductById(888);
 
       expect(result).to.deep.equal({ message: 'Product not found' });
     });

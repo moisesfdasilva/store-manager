@@ -97,7 +97,7 @@ describe('1. Teste de unidade do productsController', function () {
   });
 
   describe('1.4. Modificando um produto cadastrado', function () {
-    it('Deve retornar o status 200 e uma chave com nome e id', async function () {
+    it('a. Deve retornar o status 200 e uma chave com nome e id', async function () {
       const res = {};
       const req = {
         body: { name: 'Anel do Lanterna Verde' },
@@ -117,7 +117,7 @@ describe('1. Teste de unidade do productsController', function () {
       expect(res.json).to.have.been.calledWith(productUpIdMock);
     });
 
-    it('Deve retornar o status 404 com a mensagem "Product not found"', async function () {
+    it('b. Deve retornar o status 404 com a mensagem "Product not found"', async function () {
       const res = {};
       const req = {
         body: { name: 'Anel do Lanterna Verde' },
@@ -135,6 +135,44 @@ describe('1. Teste de unidade do productsController', function () {
 
       expect(res.status).to.have.been.calledWith(404);
       expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+    });
+  });
+
+  describe('1.5. Deletando um produto pelo id', function () {
+    it('a. Deve retornar o status 204, com id existente', async function () {
+      const res = {};
+      const req = {
+        params: { id: 2 },
+      };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      sinon
+        .stub(produtsService, 'deleteProductById')
+        .resolves(productsListMock);
+
+      await productsController.deleteProductById(req, res);
+
+      expect(res.status).to.have.been.calledWith(204);
+    });
+
+    it('b. Deve retornar o status 404, com id inexistente', async function () {
+      const res = {};
+      const req = {
+        params: { id: 999 },
+      };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      sinon
+        .stub(produtsService, 'deleteProductById')
+        .resolves({ message: 'Product not found' });
+
+      await productsController.deleteProductById(req, res);
+
+      expect(res.status).to.have.been.calledWith(404);
     });
   });
 

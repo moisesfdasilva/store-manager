@@ -64,6 +64,18 @@ describe('3. Teste de unidade do productsModel', function () {
     });
   });
 
+  describe('3.5. Deletando um produto', function () {
+    it('Deve retornar um objeto com id e nome do produto', async function () {
+      sinon
+        .stub(connection.execute)
+        .resolves(productUpIdMock);
+
+      const result = await productsModel.deleteProductById(1);
+
+      expect(result).to.deep.equal(1);
+    });
+  });
+
   afterEach(function () {
     sinon.restore();
   });
