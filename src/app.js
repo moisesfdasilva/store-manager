@@ -10,6 +10,7 @@ const salProdFieldsAuthMiddware = require('./middlewares/salProdFieldsAuthMiddwa
 
 app.use(express.json());
 
+app.get('/products/search', productsController.searchProductName);
 app.get('/products', productsController.getAllProducts);
 app.get('/products/:id', productsController.getProductById);
 app.post('/products', nameProductAuthMiddware, productsController.insertProduct);

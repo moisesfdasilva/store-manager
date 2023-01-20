@@ -314,5 +314,25 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "c9f5b694-f56f-442f-b547-d61b5bfe658b",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:PORT/products/search?q=Martelo",
+    "url": "http://localhost:3000/products/search?q=traje",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-01-20T03:02:57.630Z",
+    "modified": "2023-01-20T03:50:28.307Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "q",
+        "value": "traje",
+        "isPath": false
+      }
+    ],
+    "tests": []
   }
 ]

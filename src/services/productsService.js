@@ -51,6 +51,12 @@ const deleteProductById = async (id) => {
   return deleteProduct;
 };
 
+const searchProductName = async (searchProduct) => {
+  const searchIncludes = `%${searchProduct}%`;
+  const products = await productsModel.searchProductName(searchIncludes);
+  return products;
+};
+
 module.exports = {
   getAllProducts,
   getProductById,
@@ -58,4 +64,5 @@ module.exports = {
   insertSaledProduct,
   updateProductName,
   deleteProductById,
+  searchProductName,
 };
