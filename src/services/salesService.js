@@ -17,7 +17,6 @@ const getSaleById = async (saleId) => {
 
 const deleteSaleById = async (id) => {
   const verifyId = await validationsInputValues.validateSaleId(id);
-  console.log(verifyId);
   if (verifyId.type) return { message: 'Sale not found' };
 
   const deleteSale = await salesModel.deleteSaleById(id);
@@ -25,8 +24,27 @@ const deleteSaleById = async (id) => {
   return deleteSale;
 };
 
+const updateSaledProduct = async ({ id, saledProducts }) => {
+  const verifyProdIds = await validationsInputValues.validateProductsId(saledProducts);
+  if (verifyProdIds.type) return { message: 'Product not found' };
+
+  const verifySalId = await validationsInputValues.validateSaleId(id);
+  if (verifySalId.type) return { message: 'Sale not found' };
+
+  const saledProductsPromises = saledProducts.map(({ productId, quantity }) => (
+    salesModel.updateSaledProduct({ id, productId, quantity })
+  ));
+
+  await Promise.all(saledProductsPromises);
+
+  const result = { saleId: id, itemsUpdated: saledProducts };
+
+  return result;
+};
+
 module.exports = {
   getAllSales,
   getSaleById,
   deleteSaleById,
+  updateSaledProduct,
 };

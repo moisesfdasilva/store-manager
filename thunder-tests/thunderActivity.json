@@ -295,5 +295,24 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "a69fc5a1-5f36-4cbb-8a06-2bb65aecd71b",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/sales/12",
+    "url": "http://localhost:3000/sales/12",
+    "method": "PUT",
+    "sortNum": 0,
+    "created": "2023-01-20T01:45:58.319Z",
+    "modified": "2023-01-20T01:45:58.319Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[\n  {\n    \"productId\": 1,\n    \"quantity\": 10\n  },\n  {\n    \"productId\": 2,\n    \"quantity\": 50\n  }\n]",
+      "form": []
+    },
+    "tests": []
   }
 ]

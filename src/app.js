@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 
 const productsController = require('./controllers/productsController');
-const servicesController = require('./controllers/salesController');
+const salesController = require('./controllers/salesController');
 
 const nameProductAuthMiddware = require('./middlewares/nameProductAuthMiddware');
 const salProdFieldsAuthMiddware = require('./middlewares/salProdFieldsAuthMiddware');
@@ -17,9 +17,10 @@ app.put('/products/:id', nameProductAuthMiddware, productsController.updateProdu
 app.delete('/products/:id', productsController.deleteProductById);
 
 app.post('/sales', salProdFieldsAuthMiddware, productsController.insertSaledProduct);
-app.get('/sales', servicesController.getAllSales);
-app.get('/sales/:id', servicesController.getSaleById);
-app.delete('/sales/:id', servicesController.deleteSaleById);
+app.get('/sales', salesController.getAllSales);
+app.get('/sales/:id', salesController.getSaleById);
+app.delete('/sales/:id', salesController.deleteSaleById);
+app.put('/sales/:id', salProdFieldsAuthMiddware, salesController.updateSaledProduct);
 
 // não remova esse endpoint, é para o avaliador funcionar
 app.get('/', (_request, response) => {
