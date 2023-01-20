@@ -1,6 +1,23 @@
 const salesModel = require('../models/salesModel');
 const validationsInputValues = require('./validation/validationsInputValues');
 
+const insertSaledProduct = async (saledProducts) => {
+  const verifyIds = await validationsInputValues.validateProductsId(saledProducts);
+  if (verifyIds.type) return { message: 'Product not found' };
+
+  const productSaleId = await salesModel.insertSale();
+
+  const saledProductsPromises = saledProducts.map(({ productId, quantity }) => (
+    salesModel.insertSaleProducts({ productSaleId, productId, quantity })
+  ));
+
+  await Promise.all(saledProductsPromises);
+
+  const result = { id: productSaleId, itemsSold: saledProducts };
+
+  return result;
+};
+
 const getAllSales = async () => {
   const sales = await salesModel.getAllSales();
   return sales;
@@ -43,6 +60,7 @@ const updateSaledProduct = async ({ id, saledProducts }) => {
 };
 
 module.exports = {
+  insertSaledProduct,
   getAllSales,
   getSaleById,
   deleteSaleById,

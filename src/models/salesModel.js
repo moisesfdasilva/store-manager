@@ -1,4 +1,24 @@
 const { connection } = require('./connection');
+const convertDateTime = require('../helpers/convertDateTime');
+
+const insertSale = async () => {
+  const querry = 'INSERT INTO StoreManager.sales(date) VALUES(?)';
+  const fullDateTimeNow = new Date();
+  const convertedDateTimeNow = convertDateTime(fullDateTimeNow);
+  const [newSale] = await connection.execute(querry, [convertedDateTimeNow]);
+
+  return newSale.insertId;
+};
+
+const insertSaleProducts = async ({ productSaleId, productId, quantity }) => {
+  const qPt1 = 'INSERT IGNORE INTO StoreManager.sales_products(sale_id, product_id, quantity)';
+  const qPt2 = 'VALUES (?, ?, ?)';
+
+  const [newSalProd] = await connection
+    .execute(`${qPt1} ${qPt2}`, [productSaleId, productId, quantity]);
+
+  return newSalProd;
+};
 
 const getAllSales = async () => {
   const qPt1 = 'SELECT sale_id AS saleId, date, product_id AS productId, quantity';
@@ -47,6 +67,8 @@ const updateSaledProduct = async ({ id, productId, quantity }) => {
 };
 
 module.exports = {
+  insertSale,
+  insertSaleProducts,
   getAllSales,
   getSaleById,
   getSaleWhithProducById,
