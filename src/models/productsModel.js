@@ -27,8 +27,8 @@ const getProductsByIds = async (sqlArray) => {
 
 const updateProductName = async ({ name, id }) => {
   const querry = 'UPDATE StoreManager.products SET name = ? WHERE id = ?';
-  const updateProduct = await connection.execute(querry, [name, id]);
-  return updateProduct;
+  const [updateProduct] = await connection.execute(querry, [name, id]);
+  return updateProduct.affectedRows;
 };
 
 const deleteProductById = async (id) => {

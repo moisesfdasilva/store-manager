@@ -23,8 +23,14 @@ const newProductMock = {
   "name": "ProdutoX"
 };
 
+const productUpIdMock = {
+  "id": 2,
+  "name": "Anel do Lanterna Verde"
+}
+
 module.exports = {
   productsListMock,
   productIdMock,
   newProductMock,
+  productUpIdMock,
 };
