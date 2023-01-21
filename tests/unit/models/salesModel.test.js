@@ -88,7 +88,7 @@ describe('6. Teste de unidade do salesModel', function () {
     it('Deve retornar a quantidade de vendas deletadas', async function () {
       sinon
         .stub(connection, 'execute')
-        .resolves(1);
+        .resolves([{ affectedRows: 1 }]);
 
       const result = await salesModel.deleteSaleById(4);
 
@@ -96,11 +96,11 @@ describe('6. Teste de unidade do salesModel', function () {
     });
   });
 
-  describe('6.6. Modificando uma venda por id', function () {
+  describe('6.7. Modificando uma venda por id', function () {
     it('Deve retornar a quantidade de vendas modificadas', async function () {
       sinon
         .stub(connection, 'execute')
-        .resolves([1]);
+        .resolves([{affectedRows: 1}]);
 
       const result = await salesModel.updateSaledProduct(4);
 
