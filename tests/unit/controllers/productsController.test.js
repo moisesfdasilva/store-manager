@@ -139,7 +139,7 @@ describe('1. Teste de unidade do productsController', function () {
   });
 
   describe('1.5. Deletando um produto pelo id', function () {
-    it('a. Deve retornar o status 204, com id existente', async function () {
+    it('a. Deve retornar o status 204', async function () {
       const res = {};
       const req = {
         params: { id: 2 },
@@ -150,14 +150,14 @@ describe('1. Teste de unidade do productsController', function () {
 
       sinon
         .stub(produtsService, 'deleteProductById')
-        .resolves(productsListMock);
+        .resolves(2);
 
       await productsController.deleteProductById(req, res);
 
       expect(res.status).to.have.been.calledWith(204);
     });
 
-    it('b. Deve retornar o status 404, com id inexistente', async function () {
+    it('b. Deve retornar o status 404, se o id é inexistente', async function () {
       const res = {};
       const req = {
         params: { id: 999 },
