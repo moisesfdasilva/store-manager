@@ -51,7 +51,7 @@ describe('4. Teste de unidade do salesController', function () {
     });
   });
 
-  describe('4.2. Listando todos produtos', function () {
+  describe('4.2. Listando todas as vendas', function () {
     it('Deve retornar o status 200 e a lista', async function () {
       const res = {};
       const req = {};
@@ -70,7 +70,7 @@ describe('4. Teste de unidade do salesController', function () {
     });
   });
 
-  describe('4.3. Busca um produto por id', function () {
+  describe('4.3. Busca uma venda por id', function () {
     it('a. Deve retornar o status 200 com os dados da venda', async function () {
       const res = {};
       const req = {
