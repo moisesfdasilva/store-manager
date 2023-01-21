@@ -60,7 +60,7 @@ describe('2. Teste de unidade do productsService', function () {
         .resolves({ type: '', message: '' });
       sinon
         .stub(productsModel, 'updateProductName')
-        .resolves(productUpIdMock);
+        .resolves(1);
 
       const result = await productsService.updateProductName(productUpIdMock);
 
@@ -79,17 +79,17 @@ describe('2. Teste de unidade do productsService', function () {
   });
 
   describe('2.5. Deleta um produto pelo id', function () {
-    it('a. Se o id é válido ...', async function () {
+    it('a. Se o id é válido retorna a quantidade de linhas afetadas', async function () {
       sinon
         .stub(validationsInputValues, 'validateProductId')
         .resolves({ type: '', message: '' });
       sinon
         .stub(productsModel, 'deleteProductById')
-        .resolves(productUpIdMock);
+        .resolves(1);
 
       const result = await productsService.deleteProductById(1);
 
-      expect(result).to.deep.equal(productUpIdMock);
+      expect(result).to.deep.equal(1);
     });
 
     it('b. Se o id não é válido retorna a mensagem "Product not found"', async function () {
@@ -100,6 +100,18 @@ describe('2. Teste de unidade do productsService', function () {
       const result = await productsService.deleteProductById(888);
 
       expect(result).to.deep.equal({ message: 'Product not found' });
+    });
+  });
+
+  describe('2.6. Buscando produtos pelo nome', function () {
+    it('Deve retornar uma lista de objetos com id e nome do produto', async function () {
+      sinon
+        .stub(productsModel, 'searchProductName')
+        .resolves(productsListMock);
+
+      const result = await productsService.searchProductName('d');
+
+      expect(result).to.deep.equal(productsListMock);
     });
   });
 

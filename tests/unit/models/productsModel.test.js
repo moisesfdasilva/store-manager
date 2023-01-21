@@ -52,7 +52,7 @@ describe('3. Teste de unidade do productsModel', function () {
   });
 
   describe('3.4. Modificando um produto', function () {
-    it('Deve retornar um objeto com id e nome do produto', async function () {
+    it('Deve retornar a quantidade de linhas afetadas', async function () {
       sinon
         .stub(connection, 'execute')
         .resolves([{ affectedRows: 1 }]);
@@ -64,7 +64,7 @@ describe('3. Teste de unidade do productsModel', function () {
   });
 
   describe('3.5. Deletando um produto', function () {
-    it('Deve retornar um objeto com id e nome do produto', async function () {
+    it('Deve retornar a quantidade de linhas afetadas', async function () {
       sinon
         .stub(connection, 'execute')
         .resolves([{ affectedRows: 1 }]);
@@ -72,6 +72,30 @@ describe('3. Teste de unidade do productsModel', function () {
       const result = await productsModel.deleteProductById(1);
 
       expect(result).to.deep.equal(1);
+    });
+  });
+
+  describe('3.6. Buscando produtos pelo nome', function () {
+    it('Deve retornar um array de objetos com id e nome do produto', async function () {
+      sinon
+        .stub(connection, 'execute')
+        .resolves([productsListMock]);
+
+      const result = await productsModel.searchProductName('%d%');
+
+      expect(result).to.deep.equal(productsListMock);
+    });
+  });
+
+  describe('3.7. Buscando uma lista de produtos pelos ids', function () {
+    it('Deve retornar uma lista de objetos com id e nome do produto', async function () {
+      sinon
+        .stub(connection, 'execute')
+        .resolves([productsListMock]);
+
+      const result = await productsModel.getProductsByIds('(1, 2, 3)');
+
+      expect(result).to.deep.equal(productsListMock);
     });
   });
 

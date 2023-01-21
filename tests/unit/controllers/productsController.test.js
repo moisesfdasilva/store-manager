@@ -176,6 +176,27 @@ describe('1. Teste de unidade do productsController', function () {
     });
   });
 
+  describe('1.6. Buscando uma lista de produtos pelos ids', function () {
+    it('Deve retornar uma lista de objetos com id e nome do produto', async function () {
+      const res = {};
+      const req = {
+        query: { q: 'd' },
+      };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      sinon
+        .stub(produtsService, 'searchProductName')
+        .resolves(productsListMock);
+
+      await productsController.searchProductName(req, res);
+
+      expect(res.status).to.have.been.calledWith(200);
+      expect(res.json).to.have.been.calledWith(productsListMock);
+    });
+  });
+
   afterEach(function () {
     sinon.restore();
   });
